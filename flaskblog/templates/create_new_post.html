@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>Create New Post</title>
+{% endblock %}
+
+{% block content %}
+<div class="post">
+    <div class="container">
+        <h1 class='title'>Write a new blog post</h1>
+        <form method="POST" class='post_form'>
+            <div class='post_title'>
+                <label for="title_input"></label>
+                <input type="text" class="post_title-input" id="title_input" name='title' placeholder="Enter a Title" required>
+            </div>
+            <div class='post_body'>
+                <label for="body_post"></label>
+                <textarea type="text" class="ckeditor" id="body_post" name='body_post' placeholder="Enter your text here" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

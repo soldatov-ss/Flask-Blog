@@ -1,0 +1,25 @@
+{% extends 'base.html'%}
+{% block title %}
+<title>Login</title>
+{% endblock %}
+
+{% block content %}
+
+
+<div class="form">
+  <div class="container">
+    <form class='form_items' method="POST">
+        <div>
+            <label for="username">Username</label>
+            <input type="text" class="" id="username" name='username' placeholder="Enter your username" required>
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input type="password"  id="password" name='password' placeholder="Enter your password" required>
+        </div>
+        <button type="submit" class="btn btn-warning" >Submit</button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

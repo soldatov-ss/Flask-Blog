@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AACK,AAAD,WAAO,AAAC,CACJ,UAAU,CAAE,MAAM,CAClB,UAAU,CAAE,IAAI,CAChB,SAAS,CAAE,IAAI,CAAG",
+    "sources": [
+        "../sass/create_new_post.sass"
+    ],
+    "names": [],
+    "file": "create_new_post.min.css"
+}

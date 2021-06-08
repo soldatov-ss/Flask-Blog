@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>My Post</title>
+{% endblock %}
+
+{% block content %}
+    {% if post %}
+    <div class="one_post">
+        <div class="container">
+            <div class="one_post-border">
+                <div class="one_post-title">{{ post.title }}</div>
+                <div class="one_post-body">{{post.body |safe }}</div>
+                <div class="one_post-author">By from {{ post.author }}</div>
+                <a href="/edit-post/{{post.blog_id}}" class='btn btn-primary '>edit post</a>
+                <a href="/delete-post/{{post.blog_id}}" class='btn btn-danger btn_post'>delete post</a>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <h1 class='one_post-subtitle'>NO HAVE ANY POST</h1>
+    </div>
+    {% endif %}
+{% endblock %}

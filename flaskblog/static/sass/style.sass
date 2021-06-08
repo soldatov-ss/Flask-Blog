@@ -1,0 +1,73 @@
+$main-color: #c5b94a
+$main-color-2: #e9e19f
+$color-login: #2C323A
+$color-login2: #1D2126
+*
+    font-family: 'Lato', sans-serif
+    box-sizing: border-box
+    margin: 0
+    padding: 0
+.flash_message
+    position: relative
+.flashes .success
+    position: absolute
+    padding: 20px
+    border: 2px solid
+    width: 500px
+    height: 50px
+    text-align: center
+    border-radius: 10px
+    top: 20px
+    left: 50%
+    transform: translateX(-50%)
+    z-index: 2
+    display: flex
+    align-items: center
+    justify-content: center
+    background-color: #6bf8a1
+
+.flashes .danger
+    padding: 20px
+    border: 2px solid
+    width: 500px
+    height: 50px
+    text-align: center
+    border-radius: 10px
+    position: absolute
+    top: 20px
+    left: 50%
+    transform: translateX(-50%)
+    z-index: 2
+    display: flex
+    align-items: center
+    justify-content: center
+    background-color: #f36666
+
+.container
+    max-width: 950px
+    margin: 0 auto
+
+.header
+    display: flex
+    justify-content: space-between
+    height: 50px
+    
+    &_line
+        background-color: #181302
+    &_section
+        display: flex
+        align-items: center
+    &_item
+        padding-right: 15px 
+        a
+            color: #fff
+            font-size: 20px
+            text-decoration: none
+
+@import '../sass/login';
+@import '../sass/register';
+@import '../sass/create_new_post';
+@import '../sass/my_posts';
+@import '../sass/one_post'
+@import '../sass/edit_post'
+@import '../sass/media'

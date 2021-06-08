@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="/static/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="/static/css/style.min.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/cat.css">
+    {% block title %}
+
+    {% endblock %}
+    {{ ckeditor.load() }}
+    {{super}}
+</head>
+<body>
+
+  <div class="header_line">
+  <div class="container">
+<header class='header'>
+  <div class="header_section">
+    <div class="header_item"><a href="/">Home</a></div>
+    {% if session.login %}
+    <div class="header_item"><a href="{{ url_for('create_new_post') }}">Create a new post</a></div>
+    <div class="header_item"><a href="{{ url_for('my_all_posts') }}">My Posts</a></div>
+    {% endif %}
+  </div>
+  <div class="header_section">
+    {% if session.login %}
+    <div class="header_item"><a href="/logout">Logout</a></div>
+    {% else %}
+    <div class="header_item"><a href="{{ url_for('login') }}">Login</a></div>
+    <div class="header_item"><a href="{{ url_for('register') }}">Register</a></div>
+    {% endif %}
+  </div>
+</header>
+</div>
+</div>
+<div class="flash_message">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class='flashes'>
+        {% for category, message in messages %}
+          <div class="flashes {{ category }}">{{ message }}</div>
+        {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    {% block content %}
+</div>
+  {% endblock %}
+</body>
+</html>

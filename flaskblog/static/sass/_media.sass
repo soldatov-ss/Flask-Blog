@@ -1,0 +1,160 @@
+@media  ( max-width:  1200px)
+    .my_post
+        &-list
+            grid-template-columns: repeat(2, 440px)
+            grid-gap: 23px 48px
+        &-link
+            font-size: 21px
+            padding-bottom: 11px
+        &-body
+            font-size: 17px
+    .form 
+        &_items
+            left: 30%
+            top: 25%
+    .register
+        &_items
+            left: 10%
+            grid-template-columns: repeat(2, 350px)
+            padding: 40px
+        label
+            margin-right: 8px
+    
+    
+@media ( max-width: 991px)
+    .register
+        &_items
+            left: 10%
+            grid-template-columns: repeat(1, auto)
+            grid-template-rows: repeat(6, 50px)
+            padding: 40px
+            left: 50%
+            transform: translateX(-50%)
+        label
+            margin-right: 8px
+        .btn
+            grid-row: 7/8
+            grid-column: 1/2
+    .form
+        &_items
+            padding: 40px
+            top: 40%
+            left: 28%
+    .my_post
+        &-list
+            grid-template-columns: repeat(1, auto)
+            grid-gap: 30px
+    .any_post
+        &-btn
+            top: 60%
+
+
+@media (max-width: 767px)
+    .my_post
+        &-list
+            grid-template-columns: repeat(1, auto)
+    .any_post
+        .p-text 
+            font-size: 25px
+    .post
+        &_body
+            margin-top: 90px
+        &_title-input
+            width: 90%
+            margin-top: 40px
+    .form 
+        &_items
+            left: 25%
+
+@media (max-width: 500px)
+    .register
+        &_items
+            padding: 20px
+            grid-gap: 14px
+        input
+            width: 270px
+            height: 44px
+    .form
+        &_items
+            grid-template-columns: repeat(1, auto)
+            left: 3%
+            grid-gap: 23px
+        input
+            height: 40px
+
+    .my_post
+        &-list
+            grid-template-columns: repeat(1, auto)
+        &-link
+            font-size: 20px
+            padding-bottom: 9px
+        &-body
+            font-size: 16px
+    .header
+        &_item
+            a
+                font-size: 18px
+    .post
+        &_title
+            &-input
+                width: 94%
+                margin-top: 30px
+        &_body
+            margin-top: 75px
+
+@media (max-width: 400px)
+    .register
+        input
+            width: 220px
+            height: 40px
+    .form
+        input
+            height: 42px
+        &_items
+            padding: 23px
+            top: 50%
+    .any_post
+        .p-text 
+            font-size: 23px
+    .header
+        &_item
+            a
+                font-size: 15px
+    .post
+        &_body
+            margin-top: 55px
+        &_title-input
+            margin-top: 20px
+
+
+@media (max-width: 370px)
+    .register
+        input
+            width: 180px
+
+    .form
+        label
+            margin-right: -74px
+            font-weight: normal
+        input
+            width: 270px
+        &_items
+            top: 25%
+            left: 3%
+            padding: 33px 15px
+        .btn
+            margin-left: 0
+    .header
+        &_item
+            a
+                font-size: 13px
+    .my_post
+        &-item
+            padding: 15px 20px
+        &-link
+            font-size: 17px           
+    .post
+        .title
+            font-size: 29px
+        .cke_reset_all, .cke_reset_all, .cke_reset_all a, .cke_reset_all textarea
+            display: none
