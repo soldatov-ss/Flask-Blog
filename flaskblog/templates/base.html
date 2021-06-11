@@ -43,7 +43,7 @@
 <div class="flash_message">
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
-        <div class='flashes'>
+        <div class='flash'>
         {% for category, message in messages %}
           <div class="flashes {{ category }}">{{ message }}</div>
         {% endfor %}

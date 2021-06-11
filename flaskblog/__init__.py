@@ -10,3 +10,4 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = urandom(20)
 db = SQLAlchemy(app)
 db.create_all()
+from flaskblog import routes

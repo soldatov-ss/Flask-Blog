@@ -8,10 +8,6 @@
             padding-bottom: 11px
         &-body
             font-size: 17px
-    .form 
-        &_items
-            left: 30%
-            top: 25%
     .register
         &_items
             left: 10%
@@ -38,8 +34,6 @@
     .form
         &_items
             padding: 40px
-            top: 40%
-            left: 28%
     .my_post
         &-list
             grid-template-columns: repeat(1, auto)
@@ -62,9 +56,7 @@
         &_title-input
             width: 90%
             margin-top: 40px
-    .form 
-        &_items
-            left: 25%
+
 
 @media (max-width: 500px)
     .register
@@ -75,10 +67,13 @@
             width: 270px
             height: 44px
     .form
+        label
+            margin-right: -74px
+            font-weight: normal
         &_items
             grid-template-columns: repeat(1, auto)
-            left: 3%
-            grid-gap: 23px
+            grid-gap: 20px
+            padding: 39px 26px
         input
             height: 40px
 
@@ -108,11 +103,11 @@
             width: 220px
             height: 40px
     .form
+        &_items
+            padding: 33px 15px
         input
             height: 42px
-        &_items
-            padding: 23px
-            top: 50%
+            
     .any_post
         .p-text 
             font-size: 23px
@@ -133,15 +128,8 @@
             width: 180px
 
     .form
-        label
-            margin-right: -74px
-            font-weight: normal
         input
             width: 270px
-        &_items
-            top: 25%
-            left: 3%
-            padding: 33px 15px
         .btn
             margin-left: 0
     .header
