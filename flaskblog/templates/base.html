@@ -24,14 +24,14 @@
 <header class='header'>
   <div class="header_section">
     <div class="header_item"><a href="/">Home</a></div>
-    {% if session.login %}
+    {% if current_user.is_authenticated %}
     <div class="header_item"><a href="{{ url_for('create_new_post') }}">Create a new post</a></div>
     <div class="header_item"><a href="{{ url_for('my_all_posts') }}">My Posts</a></div>
     {% endif %}
   </div>
   <div class="header_section">
-    {% if session.login %}
-    <div class="header_item"><a href="/logout">Logout</a></div>
+    {% if current_user.is_authenticated %}
+    <div class="header_item"><a href="{{ url_for('logout') }}">Logout</a></div>
     {% else %}
     <div class="header_item"><a href="{{ url_for('login') }}">Login</a></div>
     <div class="header_item"><a href="{{ url_for('register') }}">Register</a></div>

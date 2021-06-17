@@ -2,38 +2,24 @@
     min-height: 100vh
     background-color: $color-login
     position: relative
-    &_items
-        background-color: $color-login2
+    &-box
         position: absolute
-        display: grid
-        grid-template-columns: repeat(2, 400px)
-        grid-template-rows: repeat(3, 50px)
-        grid-gap: 20px
-        padding: 50px
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%)
+        width: 500px
         border: 2px solid #fff
-        border-radius: 10px
-        left: 20%
-        top: 20%
-        div
-            display: flex
-            justify-content: space-between
-        input
-            height: 50px
-            background-color: #ffffff
-            border-radius: 5px
-            margin-bottom: 15px
-            border: none
-            font-size: 14px
-            padding: 0 20px
-            font-weight: 300
-            color: #4b4b4b
-            width: 300px
-            font-style: italic
-        label
-            color: #fff
-            font-weight: bold
-            
-        .btn
-            margin-top: 5px
-            grid-row: 4/5
-            grid-column: 1/3
+        padding: 50px
+        background-color: $color-login2
+        border-radius: 5px
+    .form-control-label
+        color: #fff
+    .btn
+        margin: 10px 0
+    .text-muted
+        display: block
+        padding-top: 4px
+        border-top: 1px solid #fff
+        margin-top: 5px
+
+

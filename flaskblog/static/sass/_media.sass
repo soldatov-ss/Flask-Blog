@@ -8,32 +8,10 @@
             padding-bottom: 11px
         &-body
             font-size: 17px
-    .register
-        &_items
-            left: 10%
-            grid-template-columns: repeat(2, 350px)
-            padding: 40px
-        label
-            margin-right: 8px
+    
     
     
 @media ( max-width: 991px)
-    .register
-        &_items
-            left: 10%
-            grid-template-columns: repeat(1, auto)
-            grid-template-rows: repeat(6, 50px)
-            padding: 40px
-            left: 50%
-            transform: translateX(-50%)
-        label
-            margin-right: 8px
-        .btn
-            grid-row: 7/8
-            grid-column: 1/2
-    .form
-        &_items
-            padding: 40px
     .my_post
         &-list
             grid-template-columns: repeat(1, auto)
@@ -41,6 +19,14 @@
     .any_post
         &-btn
             top: 60%
+    .register
+        &-box
+            width: 470px
+            padding: 40px
+    .login
+        &-box
+            width: 470px
+            padding: 40px
 
 
 @media (max-width: 767px)
@@ -60,23 +46,19 @@
 
 @media (max-width: 500px)
     .register
-        &_items
+        &-box
             padding: 20px
-            grid-gap: 14px
-        input
-            width: 270px
-            height: 44px
-    .form
-        label
-            margin-right: -74px
-            font-weight: normal
-        &_items
-            grid-template-columns: repeat(1, auto)
-            grid-gap: 20px
-            padding: 39px 26px
-        input
-            height: 40px
-
+            width: 300px
+    .login
+        &-box
+            padding: 20px
+            width: 300px
+        .btn
+            padding: 0.375rem 6.75rem
+    .flashes
+        width: 360px
+        height: 30px
+        top: 8px
     .my_post
         &-list
             grid-template-columns: repeat(1, auto)
@@ -98,16 +80,6 @@
             margin-top: 75px
 
 @media (max-width: 400px)
-    .register
-        input
-            width: 220px
-            height: 40px
-    .form
-        &_items
-            padding: 33px 15px
-        input
-            height: 42px
-            
     .any_post
         .p-text 
             font-size: 23px
@@ -123,15 +95,9 @@
 
 
 @media (max-width: 370px)
-    .register
-        input
-            width: 180px
-
-    .form
-        input
-            width: 270px
-        .btn
-            margin-left: 0
+    .flashes
+        height: 20px
+        width: 270px
     .header
         &_item
             a

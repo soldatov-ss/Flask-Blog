@@ -1,39 +1,32 @@
 from flaskblog import app
 from flask import request, render_template, url_for, flash, session, redirect
 from flaskblog.models import User, Blog
-from werkzeug.security import generate_password_hash, check_password_hash
-from flaskblog import db
+from flaskblog import db, login_manager, bcrypt
+from flaskblog.forms import RegistrationForm, LoginForm
+from flask_login import current_user, login_user, logout_user, login_required
 
 
 @app.route('/')
 def index():
-    all_posts = Blog.query.all()
-    if all_posts:
-        return render_template('index.html', posts=all_posts)
-    return render_template('index.html', posts=None)
+    # all_posts = Blog.query.all()
+    # if all_posts:
+    #     return render_template('index.html', posts=all_posts)
+    return render_template('index.html')
 
-@app.route('/register/', methods=['POST', 'GET'])
+@app.route('/register', methods=['POST', 'GET'])
 def register():
-    if request.method == 'POST':
-        user_info = request.form
-
-        if User.query.filter_by(email=user_info['email']).first():
-            flash('Почта уже занята', 'danger')
-            return render_template('register.html')
-        if User.query.filter_by(username=user_info['username']).first():
-            flash('Ник уже занят', 'danger')
-            return render_template('register.html')
-        if user_info['password'] != user_info['repeatPassword']:
-            flash('Passwords do not match! Please try again.', 'danger')
-            return render_template('register.html')
-
-        person = User(first_name=user_info['firstname'], last_name=user_info['lastname'], username=user_info['username'],
-                      email=user_info['email'], password=generate_password_hash(user_info['password']))
-        db.session.add(person)
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+        db.session.add(user)
         db.session.commit()
-        flash('Success!', 'success')
+        flash('Your account has been created! You are now able to log in', 'success')
         return redirect(url_for('login'))
-    return render_template('register.html')
+    return render_template('register.html', form=form)
+
 
 @app.route('/about')
 def about():
@@ -42,23 +35,22 @@ def about():
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
-    if request.method == 'POST':
-        user_info = request.form
-        if  User.query.filter_by(username=user_info['username']).first():
-            person = User.query.filter_by(username=user_info['username']).first()
-            if check_password_hash(person.password, user_info['password']):
-                session['login'] = True
-                session['first_name'] = person.first_name
-                session['last_name'] = person.last_name
-                flash(f'Welcome + {session["first_name"]}!', 'success')
-            else:
-                flash('Password is incorrect!', 'danger')
-                return render_template('login.html')
-        else:
-            flash('User does not exist!', 'danger')
-            return render_template('login.html')
+    if current_user.is_authenticated:
         return redirect(url_for('index'))
-    return render_template('login.html')
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user, remember=form.remember.data)
+            next_page = request.args.get('next')
+            if next_page:
+                return redirect(next_page)
+            else:
+                return redirect(url_for('index'))
+        else:
+            flash('Login Unsuccessful. Please check email and password', 'danger')
+    return render_template('login.html', form=form)
+
 
 
 @app.route('/new-post', methods=['POST', 'GET'])
@@ -78,12 +70,10 @@ def create_new_post():
 
 @app.route('/edit-post/<int:id>', methods=['POST', 'GET'])
 def edit_post(id):
-    print(id)
     if request.method == 'POST':
         new_post = request.form
         old_post = Blog.query.get(id)
         old_post.title = new_post['title']
-        # old_post.author = new_post['author']
         old_post.body = new_post['body_post']
         db.session.commit()
         flash('Blog is updated successfully', 'success')
@@ -119,6 +109,6 @@ def delete_post(id):
 
 @app.route('/logout')
 def logout():
-    session.clear()
-    flash('You have been logged out!', 'success')
-    return redirect('/')
+    logout_user()
+    return redirect(url_for('index'))
+
