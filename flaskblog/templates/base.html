@@ -25,8 +25,7 @@
   <div class="header_section">
     <div class="header_item"><a href="/">Home</a></div>
     {% if current_user.is_authenticated %}
-    <div class="header_item"><a href="{{ url_for('create_new_post') }}">Create a new post</a></div>
-    <div class="header_item"><a href="{{ url_for('my_all_posts') }}">My Posts</a></div>
+    <div class="header_item"><a href="{{ url_for('new_post') }}">Create a new post</a></div>
     {% endif %}
   </div>
   <div class="header_section">

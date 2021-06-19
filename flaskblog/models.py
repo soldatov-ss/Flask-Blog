@@ -22,7 +22,7 @@ class Blog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date_posted = db.Column(db.DateTime, default=datetime.utcnow)
     title = db.Column(db.String(100), nullable=False)
-    body = db.Column(db.String(1000),  nullable=False)
+    content = db.Column(db.String(1000), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):

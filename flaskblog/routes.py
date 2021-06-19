@@ -1,8 +1,10 @@
+import os
+import secrets
 from flaskblog import app
-from flask import request, render_template, url_for, flash, session, redirect
+from flask import request, render_template, url_for, flash, redirect
 from flaskblog.models import User, Blog
-from flaskblog import db, login_manager, bcrypt
-from flaskblog.forms import RegistrationForm, LoginForm
+from flaskblog import db, bcrypt
+from flaskblog.forms import RegistrationForm, LoginForm, PostForm
 from flask_login import current_user, login_user, logout_user, login_required
 
 
@@ -53,49 +55,17 @@ def login():
 
 
 
-@app.route('/new-post', methods=['POST', 'GET'])
-def create_new_post():
-    if request.method == 'POST':
-        user_info = request.form
-        title = user_info['title']
-        author = session['first_name'] + ' ' + session['last_name']
-        body = user_info['body_post']
-        new_post = Blog(title=title, author=author, body=body)
-        db.session.add(new_post)
+@app.route('/post/new', methods=['POST', 'GET'])
+@login_required
+def new_post():
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Blog(title=form.title.data, content=form.content.data, author=current_user)
+        db.session.add(post)
         db.session.commit()
-        flash('Your blogpost is successfully posted!', 'success')
-        return redirect('/')
-    return render_template('create_new_post.html')
-
-
-@app.route('/edit-post/<int:id>', methods=['POST', 'GET'])
-def edit_post(id):
-    if request.method == 'POST':
-        new_post = request.form
-        old_post = Blog.query.get(id)
-        old_post.title = new_post['title']
-        old_post.body = new_post['body_post']
-        db.session.commit()
-        flash('Blog is updated successfully', 'success')
-        return redirect(f'/post-id/{id}')
-    post = Blog.query.get(id)
-    return render_template('edit_post.html', post=post)
-
-
-@app.route('/post-id/<int:id>')
-def one_post(id):
-    post = Blog.query.get(id)
-    if post:
-        return render_template('one_post.html', post=post)
-    return render_template('one_post.html', post=None)
-
-@app.route('/my-posts')
-def my_all_posts():
-    author = session['first_name'] + ' ' + session['last_name']
-    all_posts = Blog.query.filter_by(author=author).all()
-    if all_posts:
-        return render_template('my_all_posts.html', posts=all_posts)
-    return render_template('my_all_posts.html', posts=None)
+        flash('Your post has been created', 'success')
+        return redirect(url_for('index'))
+    return render_template('create_post.html', form=form)
 
 
 @app.route('/delete-post/<int:id>')

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>Create New Post</title>
+{% endblock %}
+
+{% block content %}
+<div class="post">
+    <div class="container">
+        <h1 class='title'>Write a new blog post</h1>
+        <form method="POST" class='post_form' action="">
+            {{ form.hidden_tag() }}
+            <div class='post_title'>
+                {{ form.title.label(class="post_label-title") }}
+                {% if form.title.errors %}
+                    {{ form.title(class='post-input invalid') }}
+                        <div class="post_invalid-fidback">
+                            {% for error in form.title.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                {% else %}
+                    {{ form.title(class="post_title-input") }}
+                {% endif %}
+            </div>
+            <div class='post_body'>
+                {{ form.content.label(class='post_label-content') }}
+                {% if form.content.errors %}
+                    {{ form.content(class='post-input invalid') }}
+                        <div class="post_invalid-fidback">
+                            {% for error in form.content.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                {% else %}
+                    {{ form.content(class='post_title-content') }}
+                {% endif %}
+            </div>
+            {{ form.submit(class='btn btn-outline-warning') }}
+        </form>
+    </div>
+</div>
+
+{% endblock %}
