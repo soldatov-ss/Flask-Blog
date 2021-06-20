@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>Account</title>
+{% endblock %}
+{% block content %}
+
+    <div class="account">
+        <div class="container">
+            <div class="account_border">
+                <div class="account_item-info">
+                    <img src="{{ image_file }}" alt="Your photo" class="account_img">
+                    <h2 class="account_username">{{ current_user.username }}</h2>
+                    <div class="account_email">{{ current_user.email }}</div>
+                </div>
+                <div class="account_items">
+                    <form action="" enctype="multipart/form-data", method="POST">
+                        {{ form.hidden_tag() }}
+                        <h1 class="account_info">Account info</h1>
+                        <div class="account_item">
+                            {{ form.username.label(class='account_label')}}
+                                {% if form.username.errors %}
+                                    {{ form.username(class='account_input-invalid')}}
+                                        {% for error in errors %}
+                                            <span>error</span>
+                                    {% endfor %}
+                                {% else %}
+                                    {{ form.username(class='account_input')}}
+                                {% endif %}
+                        </div>
+                        <div class="account_item">
+                            {{ form.email.label(class='account_label')}}
+                                {% if form.email.errors %}
+                                    {{ form.email(class='account_input-invalid')}}
+                                        {% for error in errors %}
+                                            <span>error</span>
+                                    {% endfor %}
+                                {% else %}
+                                    {{ form.email(class='account_input')}}
+                                {% endif %}
+                        </div>
+                        <div class="account_item">
+                            {{ form.picture.label(class='account_label') }}
+                            {{ form.picture(class="account_picture") }}
+                                {% if form.picture.errors %}
+                                    {% for error in form.picture.errors %}
+                                        <span class="account_picture-invalid">{{ error }}</span></br>
+                                    {% endfor %}
+                                {% endif %}
+                        </div>
+                        {{ form.submit(class='btn btn-warning') }}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
