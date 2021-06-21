@@ -8,7 +8,7 @@
 			<div class="home_body">
 			<img class="home_img" src="{{ url_for('static', filename='picture_img/' + post.author.image_file) }}">
 				<div class="home_subheader">
-					<a class="home_username" href="{{ url_for('user_posts', username=post.author.username) }}">{{ post.author.username }}</a>
+					<a class="home_username" href="#">{{ post.author.username }}</a>
 					<div class="home_date">{{ post.date_posted.strftime('%Y-%m-%d') }}</div>
 				</div>
 				<h2><a class="home_title" href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h2>
@@ -16,10 +16,10 @@
 			</div>
 		</div>
 	</div>
-	{% endfor %}
+
 {% else %}
 	<div class="any_post">
-		<p class="p-text">BLOG HAS NOT BEEN POSTS YET</p>
+		<p class="p-text">YOU HAVE NOT BEEN POSTS YET</p>
 		<a href="{{ url_for('new_post') }}" class='btn btn-warning any_post-btn'>Create!</a>
 	</div>
 	<script type="module" src='/static/js/style.js'></script>

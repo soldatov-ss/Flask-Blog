@@ -1,0 +1,77 @@
+.home
+    height: 100%
+    background: url('https://365psd.ru/images/backgrounds/irongrip.png')
+    &_item
+        margin: 0 auto
+        width: 70%
+        padding: 20px 0
+    &_body
+        border: 1px solid #fff
+        padding: 20px
+        position: relative
+    &_subheader
+        padding-bottom: 5px
+        border-bottom: 1px solid #fff
+    &_img
+        vertical-align: middle
+        width: 60px
+        height: 60px
+        border-radius: 50%
+    &_username
+        position: absolute
+        left: 10%
+        top: 8%
+        color: #fff
+        font-weight: bold
+        font-size: 25px
+        text-decoration: none
+    &_date
+        position: absolute
+        color: #fff
+        right: 5%
+        top: 10%
+    &_title
+        color: #fff
+        font-weight: 400
+        text-decoration: none
+    &_contant
+        color: #fff
+        font-size: 20px
+    &_btns
+
+.any_post
+    background: #111111
+    position: relative
+    min-height: 100vh
+    width: 100%
+    overflow: hidden
+    cursor: pointer
+    font-family: "Crafty Girls", cursive
+    display: flex
+    justify-content: center
+    align-items: center
+    &-btn
+        position: absolute
+        top: 55%
+.p-text 
+    color: yellow
+    font-size: 32px
+    text-shadow: 2px 2px 4px #9a9696
+    user-select: none
+@keyframes ringRotate 
+    0% 
+        transform: rotateZ(0deg) rotateY(0deg) rotateX(0deg)
+  
+    100% 
+        transform: rotateZ(-360deg) rotateY(-360deg) rotateX(-360deg)
+  
+firefly 
+    position: absolute
+    background: yellow
+    left: 0
+    border-radius: 100%
+    pointer-events: none
+    top: 0
+    transform-style: preserve-3d
+    opacity: 0
+    box-shadow: 5px 5px 44px #649bc8

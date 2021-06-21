@@ -60,3 +60,5 @@ function createCircles(x, y, tuSam) {
 		firefly.remove();
 	};
 }
+
+

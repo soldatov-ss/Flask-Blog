@@ -27,6 +27,7 @@
     {% if current_user.is_authenticated %}
     <div class="header_item"><a href="{{ url_for('new_post') }}">New post</a></div>
     <div class="header_item"><a href="{{ url_for('account') }}">Account</a></div>
+    <div class="header_item"><a href="{{ url_for('about') }}">About</a></div>
     {% endif %}
   </div>
   <div class="header_section">

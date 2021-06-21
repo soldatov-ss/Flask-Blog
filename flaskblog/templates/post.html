@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>{{ post.title }}</title>
+{% endblock %}
+{% block content %}
+<div class="my-post">
+    <div class="container">
+        <div class="my-post_border">
+            <div class="my-post_header">
+                <img class="my-post_img" src="{{ url_for('static', filename='picture_img/' + post.author.image_file) }}">
+                <a class="my-post_username" href="#">{{ post.author.username }}</a>
+                <div class="my-post_date">{{ post.date_posted.strftime('%Y-%m-%d') }}</div>
+                {% if post.author == current_user %}
+                <div class='my-post_btns'>
+                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('update_post', post_id=post.id) }}">Update</a>
+                    <button type="button" class="btn btn-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+                </div>
+                {% endif %}
+            </div>
+            <div class="my-post_body">
+                <h2 class="my-post_title">{{ post.title }}</h2>
+                <p class="my-post_content">{{ post.content }}</p>
+            </div>
+        </div>
+    </div>                
+</div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Delete Post?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
+            <input class="btn btn-danger" type="submit" value="Delete">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src='/static/js/bootstrap.bundle.min.js'></script>
+{% endblock %}

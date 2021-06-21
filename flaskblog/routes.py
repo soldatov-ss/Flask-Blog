@@ -2,19 +2,19 @@ import os
 import secrets
 from PIL import Image
 from flaskblog import app
-from flask import request, render_template, url_for, flash, redirect
+from flask import request, render_template, url_for, flash, redirect, abort
 from flaskblog.models import User, Blog
 from flaskblog import db, bcrypt
 from flaskblog.forms import RegistrationForm, LoginForm, PostForm, UpdateAccountForm
 from flask_login import current_user, login_user, logout_user, login_required
 
-
+@app.route('/home')
 @app.route('/')
 def index():
-    # all_posts = Blog.query.all()
-    # if all_posts:
-    #     return render_template('index.html', posts=all_posts)
-    return render_template('index.html')
+    page = request.args.get('page', 1, type=int)
+    posts = Blog.query.order_by(Blog.date_posted.desc()).paginate(page=page, per_page=5)
+    return render_template('index.html', posts=posts)
+
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():
@@ -64,10 +64,45 @@ def new_post():
         return redirect(url_for('index'))
     return render_template('create_post.html', form=form)
 
+@app.route('/post/<int:post_id>')
+@login_required
+def post(post_id):
+    post = Blog.query.get_or_404(post_id)
+    return render_template('post.html', post=post)
 
-@app.route('/delete-post/<int:id>')
-def delete_post(id):
-    post = Blog.query.get(id)
+@app.route('/post/<int:post_id>/update', methods=['POST', 'GET'])
+@login_required
+def update_post(post_id):
+    post = Blog.query.get_or_404(post_id)
+    if current_user != post.author:
+        abort(403)
+    form = PostForm()
+    if form.validate_on_submit():
+        post.title = form.title.data
+        post.content  = form.title.data
+        db.session.commit()
+        flash('Your post has been updated!', 'success')
+        return redirect(url_for('post', post_id=post_id))
+    elif request.method == 'GET':
+        form.title.data = post.title
+        form.content.data = post.content
+    return render_template('create_post.html', form=form)
+
+
+@app.route('/user/<string:username>')
+@login_required
+def user_posts(username):
+    page = request.args.get('page', 1, type=int)
+    user = User.query.filter_by(username=username).first_or_404()
+    posts = Blog.query.filter_by(author=user).order_by(Blog.date_posted.desc()).paginate(page=page, per_page=5)
+    return render_template('user_posts.html', user=user, posts=posts)
+
+
+
+@app.route('/delete-post/<int:post_id>', methods=['POST'])
+@login_required
+def delete_post(post_id):
+    post = Blog.query.get(post_id)
     db.session.delete(post)
     db.session.commit()
     flash('Your post has been deleted!', 'success')
@@ -106,8 +141,10 @@ def account():
 
 
 @app.route('/about')
+@login_required
 def about():
-    return render_template('about.html')
+    posts = Blog.query.all()
+    return render_template('about.html', posts=posts)
 
 @app.route('/logout')
 def logout():
