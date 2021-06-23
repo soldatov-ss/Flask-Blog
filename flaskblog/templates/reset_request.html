@@ -1,0 +1,31 @@
+{% extends 'base.html'%}
+
+{% block title%}
+<title>Reset Password</title>
+{% endblock %}
+{% block content %}
+<div class="login">
+    <div class="container">
+        <div class="login-box">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                {{ form.submit(class="btn btn-warning", style='padding:4px') }}
+            </div>
+                
+        </form>
+    </div>
+</div>
+{% endblock %}

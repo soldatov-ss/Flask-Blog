@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+
+{% block title %}
+<title>Posts</title>
+{% endblock %}
+
 {% block content %}
 {% if posts.items %}
 	{% for post in posts.items %}
@@ -16,7 +21,7 @@
 			</div>
 		</div>
 	</div>
-
+	{% endfor %}
 {% else %}
 	<div class="any_post">
 		<p class="p-text">YOU HAVE NOT BEEN POSTS YET</p>
