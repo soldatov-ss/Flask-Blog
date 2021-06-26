@@ -8,7 +8,7 @@
         <div class="my-post_border">
             <div class="my-post_header">
                 <img class="my-post_img" src="{{ url_for('static', filename='picture_img/' + post.author.image_file) }}">
-                <a class="my-post_username" href="#">{{ post.author.username }}</a>
+                <a class="my-post_username" href="{{ url_for('user_posts', username=post.author.username ) }}">{{ post.author.username }}</a>
                 <div class="my-post_date">{{ post.date_posted.strftime('%Y-%m-%d') }}</div>
                 {% if post.author == current_user %}
                 <div class='my-post_btns'>

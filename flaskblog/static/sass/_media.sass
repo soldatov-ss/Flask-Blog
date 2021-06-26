@@ -11,9 +11,29 @@
             left: 100px
             top: 17px
             font-size: 21px
+    .home
+        &_username
+            left: 13%
+        &_btns
+            left: 18%
     
+    .my-post
+        &_border
+            width: 80%
+        &_username
+            left: 15%
+        &_btns
+            left: 15%
+
 
 @media ( max-width: 991px)
+    .my-post
+        &_username
+            left: 18%
+        &_btns
+            left: 18%
+        &_body 
+            margin-left: 10px
     .account
         &_border
             width: 70%
@@ -42,8 +62,23 @@
         &-box
             width: 470px
             padding: 40px
+    .home
+        &_item
+            width: 90%
+        &_btns
+            left: 9%
     
 @media (max-width: 767px)
+    .my-post
+        &_border
+            width: 90%
+        &_username
+            left: 23%
+        &_btns
+            left: 23%
+    .home
+        &_btns
+            left: 19%
     .any_post
         .p-text 
             font-size: 25px
@@ -54,16 +89,28 @@
 
 
 @media (max-width: 500px)
+    .my-post
+        &_username
+            left: 30%
+        &_btns
+            left: 30%
+        &_body 
+            margin-left: 0px
+    .home
+        &_btns
+            left: 8%
+        &_username
+            left: 23%
     .account
         &_info
             font-size: 27px
         &_border
             width: 90%
         &_username
-            left: 39%
+            left: 42%
             font-size: 40px
         &_email
-            left: 40%
+            left: 43%
         &_img
             width: 130px
             height: 130px
@@ -96,6 +143,14 @@
     
 
 @media (max-width: 400px)
+    .my-post
+        &_username
+            left: 33%
+        &_btns
+            left: 33%
+    .home
+        &_username
+            left: 29%
     .account
         &_info
             font-size: 24px
@@ -105,7 +160,7 @@
             font-size: 30px
             font-weight: normal
         &_email
-            left: 40%
+            left: 43%
             top: 11%
         &_img
             width: 100px
@@ -127,6 +182,9 @@
         .title
             font-size: 27px
 @media (max-width: 370px)
+    .any_post
+        .p-text 
+            font-size: 20px
     .account
         &_username
             left: 44%
@@ -138,4 +196,12 @@
     .header
         &_item
             a
-                font-size: 13px    
+                font-size: 12px    
+    .my-post
+        &_username
+            left: 40%
+        &_btns
+            left: 40%
+        &_date
+            right: 0
+            top: -10%
