@@ -9,6 +9,8 @@ from flaskblog.forms import (RegistrationForm, LoginForm, PostForm,
                              UpdateAccountForm, RequestResetForm, ResetPasswordForm)
 from flask_login import current_user, login_user, logout_user, login_required
 from flask_mail import Message
+
+
 @app.route('/home')
 @app.route('/')
 def index():
@@ -32,7 +34,6 @@ def register():
     return render_template('register.html', form=form)
 
 
-
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if current_user.is_authenticated:
@@ -52,7 +53,6 @@ def login():
     return render_template('login.html', form=form)
 
 
-
 @app.route('/post/new', methods=['POST', 'GET'])
 @login_required
 def new_post():
@@ -65,11 +65,13 @@ def new_post():
         return redirect(url_for('index'))
     return render_template('create_post.html', form=form)
 
+
 @app.route('/post/<int:post_id>')
 @login_required
 def post(post_id):
     post = Blog.query.get_or_404(post_id)
     return render_template('post.html', post=post)
+
 
 @app.route('/post/<int:post_id>/update', methods=['POST', 'GET'])
 @login_required
@@ -80,7 +82,7 @@ def update_post(post_id):
     form = PostForm()
     if form.validate_on_submit():
         post.title = form.title.data
-        post.content  = form.content.data
+        post.content = form.content.data
         db.session.commit()
         flash('Your post has been updated!', 'success')
         return redirect(url_for('post', post_id=post_id))
@@ -99,7 +101,6 @@ def user_posts(username):
     return render_template('user_posts.html', user=user, posts=posts)
 
 
-
 @app.route('/delete-post/<int:post_id>', methods=['POST'])
 @login_required
 def delete_post(post_id):
@@ -108,6 +109,7 @@ def delete_post(post_id):
     db.session.commit()
     flash('Your post has been deleted!', 'success')
     return redirect('/home')
+
 
 def save_picture(form_picture):
     random_hex = secrets.token_hex(8)
@@ -120,6 +122,7 @@ def save_picture(form_picture):
     i.thumbnail(output_size)
     i.save(picture_path)
     return picture_new_name
+
 
 @app.route('/account', methods=['POST', 'GET'])
 @login_required
@@ -144,13 +147,14 @@ def account():
 @app.route('/about')
 @login_required
 def about():
-    posts = Blog.query.all()
-    return render_template('about.html', posts=posts)
+    return render_template('about.html')
+
 
 @app.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
 
 def send_reset_token(user):
     token = user.get_reset_token()
@@ -160,6 +164,7 @@ def send_reset_token(user):
 If you did not make this request then simply ignore this email and no changes will be made.
 '''
     mail.send(msg)
+
 
 @app.route('/reset_password', methods=['POST', 'GET'])
 def reset_request():
@@ -172,6 +177,7 @@ def reset_request():
         flash('An email has been sent with instructions to reset your password.', 'success')
         return redirect(url_for('login'))
     return render_template('reset_request.html', form=form)
+
 
 @app.route('/reset_password/<token>', methods=['POST', 'GET'])
 def reset_token(token):
